@@ -1,10 +1,10 @@
 # Example plots
 
-![Default plot](deault_plot/output_plot.png)
 
-![Errorbar plot different colors](errorbar_plot_different_colors/output_plot.png)
-
-![Horizontal barplot](horizonal_barplot/horizontal_barplot.png)
-
-![Intensity plot](intensity_plot/output_plot.png)
-
+ <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/deault_plot/output_plot.png" width="400">
+ 
+ <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/errorbar_plot_different_colors/output_plot.png" width="400">
+ 
+ <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/horizontal_barplot/horizontal_barplot.png" width="400">
+ 
+ <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/intensity_plot/output_plot.png" width="600">
