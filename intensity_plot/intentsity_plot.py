@@ -1,0 +1,236 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+from matplotlib import gridspec
+from matplotlib import colors
+from matplotlib import cm
+
+
+def set_graph_letter(ax,letter):
+    ax.set_title(letter, 
+                    fontsize = default_font_size, 
+                    loc='left', 
+                    y=graph_letter_y_offset, 
+                    x=graph_letter_x_offset, 
+                    fontweight='bold')
+
+
+def beautify_intensity_plot_axes(array_of_axes):
+    for ax in array_of_axes:
+        ax.spines['top'].set_visible(True)
+        ax.spines['right'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+        ax.spines['left'].set_visible(True) 
+        ax.spines['top'].set_color(axes_font_color)
+        ax.spines['bottom'].set_color(axes_font_color)
+        ax.spines['left'].set_color(axes_font_color)
+        ax.tick_params(axis='y', colors=axes_font_color)
+        ax.tick_params(axis='x', colors=axes_font_color)
+        adjust_spines(ax, ['left', 'bottom','top'])
+        ax.yaxis.set_label_coords(-0.1,1.1)
+        ax.xaxis.set_ticks_position('top')
+
+
+def adjust_spines(ax, spines):
+    for loc, spine in ax.spines.items():
+        if loc in spines:
+            spine.set_position(('outward', 10))  # outward by 10 points
+        else:
+            spine.set_color('none')  # don't draw spine
+
+    # turn off ticks where there is no spine
+    if 'left' in spines:
+        ax.yaxis.set_ticks_position('left')
+    else:
+        # no yaxis ticks
+        ax.yaxis.set_ticks([])
+
+    if 'bottom' in spines:
+        ax.xaxis.set_ticks_position('bottom')
+    else:
+        # no xaxis ticks
+        ax.xaxis.set_ticks([])
+
+
+
+# Set default values
+default_font_size = 8
+axes_font_color = '#363636' # grey
+color_second_axis = '#009E73' # green
+mrkr_size = 5
+line_width = 1
+thin_line_width = 0.5
+graph_letter_x_offset = -0.1
+graph_letter_y_offset = -0.2
+
+fig_width = 6.5 # inch
+fig_height = 2 # inch
+
+plt.rcParams.update({'font.size': 8,
+                        'legend.frameon': False, 
+                        'font.style':'normal',
+                        'font.weight':'normal',
+                        'font.family': 'serif',
+                        'font.serif': 'Times new Roman',
+                        'mathtext.fontset':'stix'})
+
+
+# Examples of colormaps
+# cm.jet
+# cm.viridis
+# cm.binary
+# cm.inferno
+# to reverse colormap add "_r" to the colormap name
+# cm.binary_r
+
+
+
+fig = plt.figure()
+# portrait graph of 3 plots
+fig.set_size_inches(fig_width,fig_height)
+gs = gridspec.GridSpec(1, 3)
+
+ax1 = plt.subplot(gs[0])
+ax2 = plt.subplot(gs[1])
+ax3 = plt.subplot(gs[2])
+
+# Generate random data
+
+Z =    [[0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0.2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0.3,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0.4,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0.6,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0.7,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0.8,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.9],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.9],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.8,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0.7,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0.6,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0.5,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0.4,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0.3,0,0,0,0,0,0],]
+
+
+
+# Plot 1
+colormap1 = cm.viridis
+
+c = ax1.pcolor(Z, 
+                edgecolors='w', 
+                cmap=colormap1,
+                linewidths=1)
+
+# Format colarbar on right
+norm = colors.Normalize(vmin=-1,vmax=60)
+sm = cm.ScalarMappable(cmap=colormap1, norm=norm)
+sm.set_array([])
+cb = plt.colorbar(sm, 
+                    ax=ax1, 
+                    ticks=((0,15,30,45,60)), 
+                    boundaries=np.arange(0,61,1))
+
+# beautify colorbar
+# set colorbar label plus label color
+# cb.set_label('colorbar label', color=axes_font_color)
+# set colorbar tick color
+cb.ax.yaxis.set_tick_params(color=axes_font_color)
+cb.outline.set_edgecolor(axes_font_color)
+
+
+# Plot 2
+colormap2 = cm.inferno
+c = ax2.pcolor(Z, 
+                edgecolors='w', 
+                cmap=colormap2,
+                linewidths=1)
+
+# Format colarbar on right
+norm = colors.Normalize(vmin=-1,vmax=60)
+sm = cm.ScalarMappable(cmap=colormap2, norm=norm)
+sm.set_array([])
+cb = plt.colorbar(sm, 
+                    ax=ax2, 
+                    ticks=((0,15,30,45,60)), 
+                    boundaries=np.arange(0,61,1))
+
+# beautify colorbar
+# set colorbar label plus label color
+# cb.set_label('colorbar label', color=axes_font_color)
+# set colorbar tick color
+cb.ax.yaxis.set_tick_params(color=axes_font_color)
+cb.outline.set_edgecolor(axes_font_color)
+
+
+
+# Plot 3
+colormap3 = cm.binary_r
+c = ax3.pcolor(Z, 
+                edgecolors='w', 
+                cmap=colormap3,
+                linewidths=1)
+
+# Format colarbar on right
+norm = colors.Normalize(vmin=-1,vmax=60)
+sm = cm.ScalarMappable(cmap=colormap3, norm=norm)
+sm.set_array([])
+cb = plt.colorbar(sm, 
+                    ax=ax3, 
+                    ticks=((0,15,30,45,60)), 
+                    boundaries=np.arange(0,61,1))
+
+# beautify colorbar
+# set colorbar label plus label color
+# cb.set_label('colorbar label', color=axes_font_color)
+# set colorbar tick color
+cb.ax.yaxis.set_tick_params(color=axes_font_color)
+cb.outline.set_edgecolor(axes_font_color)
+
+# Add graph labels and annotations
+
+# Plot 1
+set_graph_letter(ax1, "a)")
+ax1.set_title("Value (unit)", y=1.05)
+ax1.axis('off') # 'off' just turns all axes off
+ax1.set_ylim(ax1.get_ylim()[::-1]) # invert y axis
+
+
+# Plot 2
+set_graph_letter(ax2, "b)")
+ax2.set_title("Temperature (°C)", y=1.05)
+
+ax2.axis('off') # 'off' just turns all axes off
+# ax1.set_xticks([0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5,11.5,12.5,13.5,14.5,15.5])
+# ax1.set_xticklabels(["","2","","4","","6","","8","","10","","12","","14","","16"])
+
+# ax1.set_yticks([0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5,11.5,12.5,13.5,14.5,15.5])
+# ax1.set_yticklabels(["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"])
+
+ax2.set_ylim(ax2.get_ylim()[::-1]) # invert y axis
+
+
+
+# Plot 3
+set_graph_letter(ax3, "c)")
+ax3.set_title("Value (unit)", y=1.05)
+
+ax3.axis('off') # 'off' just turns all axes off
+ax3.set_ylim(ax3.get_ylim()[::-1]) # invert y axis
+
+
+plt.subplots_adjust(top=0.821,
+bottom=0.157,
+left=0.035,
+right=0.982,
+hspace=0.2,
+wspace=0.272)
+
+# plt.tight_layout()
+
+beautify_intensity_plot_axes([ax1,ax2])
+
+plt.savefig('{}.png'.format("output_plot"),dpi=600)
+
+plt.show()
