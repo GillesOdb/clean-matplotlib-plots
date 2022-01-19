@@ -1,5 +1,5 @@
 # About
-This repository contains example scripts for creating clean visuals with Matplotlib.
+This repository contains Python scripts for creating clean visuals with Matplotlib.
 
 # Example plots
 
