@@ -14,5 +14,5 @@ Inspired by <a href="https://www.principiae.be/">Jean-luc Doumont</a>.
 ## Horizontal bar plot
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/horizontal_barplot/horizontal_barplot.png" width="400">
  
-## Intensity plot -2D heatmap
+## Intensity plot - 2D heatmap
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/intensity_plot/output_plot.png" width="600">
