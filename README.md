@@ -1,3 +1,6 @@
+# About
+This repository contains example scripts for creating clean visuals with Matplotlib.
+
 # Example plots
 
 ## General
