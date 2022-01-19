@@ -6,6 +6,7 @@ Inspired by <a href="https://www.principiae.be/">Jean-luc Doumont</a>.
 # Example plots
 
 ## General
+- Notice how you don't need to rotate your head to read the y axis label
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/deault_plot/output_plot.png" width="400">
 
 ## Error bar - different colors
@@ -20,7 +21,7 @@ y_data = [[1,2,3,4,5],[2,5,6,7,8,31,7],[1,2,54,53,3,2,5,1,0],[1,2,5,66,7,4,2]]
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/errorbar_plot_different_colors/output_plot.png" width="400">
 
 ## Horizontal bar plot
-- Ented data as dict
+- Enter data as dict
 - Automagically sorted from high to low
 
 ```
