@@ -1,6 +1,8 @@
 # About
 This repository contains Python scripts for creating clean visuals with Matplotlib.
 
+Inspired by <a href="https://www.principiae.be/">Jean-luc Doumont</a>.
+
 # Example plots
 
 ## General
