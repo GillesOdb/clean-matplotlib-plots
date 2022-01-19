@@ -2,9 +2,9 @@
 
 ![Default plot](deault_plot/output_plot.png)
 
-![Default plot](errorbar_plot_different_colors/output_plot.png)
+![Errorbar plot different colors](errorbar_plot_different_colors/output_plot.png)
 
-![Default plot](horizonal_barplot/output_plot.png)
+![Horizontal barplot](horizonal_barplot/horizontal_barplot.png)
 
-![Default plot](deault_intensity_plotplot/output_plot.png)
+![Intensity plot](intensity_plot/output_plot.png)
 
