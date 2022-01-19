@@ -7,11 +7,14 @@ Inspired by <a href="https://www.principiae.be/">Jean-luc Doumont</a>.
 
 ## General
 - Notice how you don't need to rotate your head to read the y axis label
+- Easily add graph letters a), b), c), ... 
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/deault_plot/output_plot.png" width="400">
 
 ## Error bar - different colors
 - Enter x data as a list
 - Enter y data as a list of lists
+- The number of values in x_data should be equal to the number of lists in y_data
+- The number of values in the y_data sublists is not important
 
 ```
 x_data = [10,20,30,40]
