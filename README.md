@@ -8,7 +8,7 @@ Inspired by <a href="https://www.principiae.be/">Jean-luc Doumont</a>.
 ## General
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/deault_plot/output_plot.png" width="400">
 
-## Errorbar - different colors
+## Error bar - different colors
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/errorbar_plot_different_colors/output_plot.png" width="400">
 
 ## Horizontal bar plot
