@@ -4,6 +4,7 @@ import numpy as np
 from natsort import natsorted
 from matplotlib import gridspec
 
+import random
 
 def beautify_axes(array_of_axes):
     for ax in array_of_axes:
@@ -60,18 +61,12 @@ def set_graph_letter(ax,letter):
                     fontweight='bold')
 
 
-def custom_errorbar_plot(ax, x_data, y_data, color):
+def custom_errorbar_plot(ax, x_data, y_data, color, add_jitter=False, jitter_max=1):
     x_data = np.array(x_data, dtype="object")  
     y_data = np.array(y_data, dtype="object")
 
-    print(x_data)
-    print(y_data)
-
     x_len = len(x_data)
     y_len = len(y_data)
-
-    print(x_len)
-    print(y_len)
 
     if x_len != y_len:
         print("ERROR - Array sizes do not match")
@@ -80,9 +75,12 @@ def custom_errorbar_plot(ax, x_data, y_data, color):
     i = 0
     # plot points
     for x in x_data:
-
         for y in y_data[i]:
-            ax.plot(x,y,
+            if add_jitter:
+                jitter_x = x + random.uniform(-jitter_max, jitter_max)
+            else:
+                jitter_x = x
+            ax.plot(jitter_x,y,
                         '.',
                         color=color,
                         markersize=mrkr_size, 
@@ -144,11 +142,10 @@ ax1 = plt.subplot(gs[0])
 x_data = [10,20,30,40]
 y_data = [[1,2,3,4,5],[2,5,6,7,8,31,7],[1,2,54,53,3,2,5,1,0],[1,2,5,66,7,4,2]]
 
-custom_errorbar_plot(ax1, [x_data[0]], [y_data[0]], color_palette[0])
-custom_errorbar_plot(ax1, [x_data[1]], [y_data[1]], color_palette[1])
-custom_errorbar_plot(ax1, [x_data[2]], [y_data[2]], color_palette[2])
-custom_errorbar_plot(ax1, [x_data[3]], [y_data[3]], color_palette[3])
-
+custom_errorbar_plot(ax=ax1, x_data=[x_data[0]], y_data=[y_data[0]], color=color_palette[0], add_jitter=False, jitter_max=0.5)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[1]], y_data=[y_data[1]], color=color_palette[1], add_jitter=False, jitter_max=0.5)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[2]], y_data=[y_data[2]], color=color_palette[2], add_jitter=False, jitter_max=0.5)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[3]], y_data=[y_data[3]], color=color_palette[3], add_jitter=False, jitter_max=0.5)
 
 
 

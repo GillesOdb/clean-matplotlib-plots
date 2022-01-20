@@ -23,6 +23,11 @@ y_data = [[1,2,3,4,5],[2,5,6,7,8,31,7],[1,2,54,53,3,2,5,1,0],[1,2,5,66,7,4,2]]
 
 <img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/errorbar_plot_different_colors/output_plot.png" width="400">
 
+
+- Optionally add jitter
+
+<img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/errorbar_plot_different_colors/output_plot_with_jitter.png" width="400">
+
 ## Horizontal bar plot
 - Enter data as dict
 - Automagically sorted from high to low
