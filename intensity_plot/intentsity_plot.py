@@ -52,6 +52,62 @@ def adjust_spines(ax, spines):
         ax.xaxis.set_ticks([])
 
 
+def map_value(value, min_in, max_in, min_out, max_out):
+    if value < min_in:
+        return min_out
+    elif value > max_in:
+        return max_out
+    else:
+        return (value - min_in)*(max_out-min_out)/(max_in-min_in) + min_out
+
+
+def map_nested_list(list_in, min_in, max_in, min_out, max_out):
+    nr_of_rows = len(list_in)
+    nr_of_cols = len(list_in[0])
+
+    print("nr_of_rows = {}".format(nr_of_rows))
+    print("nr_of_cols = {}".format(nr_of_cols))
+
+    mapped_array = []
+
+    for row in range(nr_of_rows):
+        mapped_subarray = []
+        for col in range(nr_of_cols):
+            original_value = list_in[row][col]
+            mapped_value = map_value(original_value, min_in, max_in, min_out, max_out)
+            mapped_subarray.append(mapped_value)
+        mapped_array.append(mapped_subarray)
+    for sublist in mapped_array:
+        print(sublist)
+    return mapped_array
+
+
+
+def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewidths=1,):
+    mapped_list = map_nested_list(input_list,min_value,max_value,0,1)
+
+    c = ax.pcolor(mapped_list, 
+                    edgecolors='w', 
+                    cmap=colormap,
+                    linewidths=linewidths)
+
+    # Format colarbar on right
+    norm = colors.Normalize(vmin=min_value,vmax=max_value)
+    sm = cm.ScalarMappable(cmap=colormap, norm=norm)
+    sm.set_array([])
+    cb = plt.colorbar(sm, 
+                        ax=ax, 
+                        ticks=((0,15,30,45,60)), 
+                        boundaries=np.arange(0,max_value+1,min_value+1))
+
+    # beautify colorbar
+    # set colorbar label plus label color
+    # cb.set_label('colorbar label', color=axes_font_color)
+    # set colorbar tick color
+    cb.ax.yaxis.set_tick_params(color=axes_font_color)
+    cb.outline.set_edgecolor(axes_font_color)
+
+
 
 # Set default values
 default_font_size = 8
@@ -84,7 +140,6 @@ plt.rcParams.update({'font.size': 8,
 # cm.binary_r
 
 
-
 fig = plt.figure()
 # portrait graph of 3 plots
 fig.set_size_inches(fig_width,fig_height)
@@ -96,100 +151,70 @@ ax3 = plt.subplot(gs[2])
 
 # Generate random data
 
-Z =    [[0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0.2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0.3,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0.4,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0.6,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0.7,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0.8,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.9],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.9],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.8,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0.7,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0.6,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0.5,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0.4,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0.3,0,0,0,0,0,0],]
-
+input_list =    [[10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,35,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,45,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,55,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,60,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,55,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,45,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35],]
 
 
 # Plot 1
-colormap1 = cm.viridis
 
-c = ax1.pcolor(Z, 
-                edgecolors='w', 
-                cmap=colormap1,
-                linewidths=1)
+ticks = (0,15,30)
+max_value = 60
+min_value = 0
 
-# Format colarbar on right
-norm = colors.Normalize(vmin=-1,vmax=60)
-sm = cm.ScalarMappable(cmap=colormap1, norm=norm)
-sm.set_array([])
-cb = plt.colorbar(sm, 
-                    ax=ax1, 
-                    ticks=((0,15,30,45,60)), 
-                    boundaries=np.arange(0,61,1))
+plot_heatmap(ax=ax1, 
+                list_in=input_list, 
+                min_in=0, 
+                max_in=60, 
+                colormap=cm.viridis,
+                ticks_scale_bar=(0,15,30,45,60),
+                linewidths=0.5)
 
-# beautify colorbar
-# set colorbar label plus label color
-# cb.set_label('colorbar label', color=axes_font_color)
-# set colorbar tick color
-cb.ax.yaxis.set_tick_params(color=axes_font_color)
-cb.outline.set_edgecolor(axes_font_color)
 
 
 # Plot 2
-colormap2 = cm.inferno
-c = ax2.pcolor(Z, 
-                edgecolors='w', 
-                cmap=colormap2,
+ticks = (0,15,30)
+max_value = 60
+min_value = 0
+
+plot_heatmap(ax=ax2, 
+                list_in=input_list, 
+                min_in=0, 
+                max_in=60, 
+                colormap=cm.inferno,
+                ticks_scale_bar=(0,15,30,45,60),
                 linewidths=1)
-
-# Format colarbar on right
-norm = colors.Normalize(vmin=-1,vmax=60)
-sm = cm.ScalarMappable(cmap=colormap2, norm=norm)
-sm.set_array([])
-cb = plt.colorbar(sm, 
-                    ax=ax2, 
-                    ticks=((0,15,30,45,60)), 
-                    boundaries=np.arange(0,61,1))
-
-# beautify colorbar
-# set colorbar label plus label color
-# cb.set_label('colorbar label', color=axes_font_color)
-# set colorbar tick color
-cb.ax.yaxis.set_tick_params(color=axes_font_color)
-cb.outline.set_edgecolor(axes_font_color)
-
 
 
 # Plot 3
-colormap3 = cm.binary_r
-c = ax3.pcolor(Z, 
-                edgecolors='w', 
-                cmap=colormap3,
-                linewidths=1)
+ticks = (0,15,30)
+max_value = 30 # values will clip at 30
+min_value = 0
 
-# Format colarbar on right
-norm = colors.Normalize(vmin=-1,vmax=60)
-sm = cm.ScalarMappable(cmap=colormap3, norm=norm)
-sm.set_array([])
-cb = plt.colorbar(sm, 
-                    ax=ax3, 
-                    ticks=((0,15,30,45,60)), 
-                    boundaries=np.arange(0,61,1))
+plot_heatmap(ax=ax3, 
+                list_in=input_list, 
+                min_in=0, 
+                max_in=60, 
+                colormap=cm.binary_r,
+                ticks_scale_bar=(0,15,30,45,60),
+                linewidths=0)
 
-# beautify colorbar
-# set colorbar label plus label color
-# cb.set_label('colorbar label', color=axes_font_color)
-# set colorbar tick color
-cb.ax.yaxis.set_tick_params(color=axes_font_color)
-cb.outline.set_edgecolor(axes_font_color)
+
 
 # Add graph labels and annotations
-
 # Plot 1
 set_graph_letter(ax1, "a)")
 ax1.set_title("Value (unit)", y=1.05)
