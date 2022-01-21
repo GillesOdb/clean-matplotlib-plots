@@ -186,12 +186,11 @@ ax1.set_xlabel(r'Time (s$^{1/2}$)',color=axes_font_color)
 ax1.set_ylabel(r'$\Delta$U (V)',color=axes_font_color, rotation='horizontal')
 
 x_min = 0
-x_max = 0.8
+x_max = 1.2
 y_min = 0
-y_max = 1.2
-
-ax1.spines['left'].set_bounds((x_min, x_max))
-ax1.spines['bottom'].set_bounds((y_min, y_max))
+y_max = 0.8
+ax1.spines['bottom'].set_bounds((x_min, x_max))
+ax1.spines['left'].set_bounds((y_min, y_max))
 
 ax1.set_yticks((0,0.5))
 ax1.set_xticks((0,0.7,1.1))
@@ -206,6 +205,15 @@ ax1.axvline(x=1.1, linewidth=thin_line_width, color='black', linestyle= '--')
 set_graph_letter(ax2,'b)')
 ax2.set_xlabel("Time (min)",color=axes_font_color)
 ax2.set_ylabel('Change in \n slope (%)',color=axes_font_color, rotation='horizontal')
+
+x_min = 0
+x_max = 50
+y_min = -10
+y_max = 10
+ax2.spines['bottom'].set_bounds((x_min, x_max))
+ax2.spines['left'].set_bounds((y_min, y_max))
+ax2_b.spines['bottom'].set_bounds((x_min, x_max))
+ax2_b.spines['left'].set_bounds((y_min, y_max))
 
 ax2.set_ylim(-10,10)
 ax2.arrow(32, 8, 0, -3 , fc=axes_font_color, ec=axes_font_color,head_width=1, head_length=1.25,color=axes_font_color)
