@@ -142,10 +142,10 @@ ax1 = plt.subplot(gs[0])
 x_data = [10,20,30,40]
 y_data = [[1,2,3,4,5],[2,5,6,7,8,31,7],[1,2,54,53,3,2,5,1,0],[1,2,5,66,7,4,2]]
 
-custom_errorbar_plot(ax=ax1, x_data=[x_data[0]], y_data=[y_data[0]], color=color_palette[0], add_jitter=False, jitter_max=0.5)
-custom_errorbar_plot(ax=ax1, x_data=[x_data[1]], y_data=[y_data[1]], color=color_palette[1], add_jitter=False, jitter_max=0.5)
-custom_errorbar_plot(ax=ax1, x_data=[x_data[2]], y_data=[y_data[2]], color=color_palette[2], add_jitter=False, jitter_max=0.5)
-custom_errorbar_plot(ax=ax1, x_data=[x_data[3]], y_data=[y_data[3]], color=color_palette[3], add_jitter=False, jitter_max=0.5)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[0]], y_data=[y_data[0]], color=color_palette[0], add_jitter=False, jitter_max=0.8)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[1]], y_data=[y_data[1]], color=color_palette[1], add_jitter=False, jitter_max=0.8)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[2]], y_data=[y_data[2]], color=color_palette[2], add_jitter=False, jitter_max=0.8)
+custom_errorbar_plot(ax=ax1, x_data=[x_data[3]], y_data=[y_data[3]], color=color_palette[3], add_jitter=False, jitter_max=0.8)
 
 
 
