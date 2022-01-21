@@ -172,13 +172,13 @@ input_list =   [[10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 # Plot 1
 
 ticks = (0,15,30)
-max_value = 60
 min_value = 0
+max_value = 60
 
 plot_heatmap(ax=ax1, 
                 list_in=input_list, 
-                min_in=0, 
-                max_in=60, 
+                min_in=min_value, 
+                max_in=max_value, 
                 colormap=cm.viridis,
                 ticks_scale_bar=(0,15,30,45,60),
                 linewidths=0.5)
@@ -187,13 +187,13 @@ plot_heatmap(ax=ax1,
 
 # Plot 2
 ticks = (0,15,30)
-max_value = 60
 min_value = 0
+max_value = 60
 
 plot_heatmap(ax=ax2, 
                 list_in=input_list, 
-                min_in=0, 
-                max_in=60, 
+                min_in=min_value, 
+                max_in=max_value, 
                 colormap=cm.inferno,
                 ticks_scale_bar=(0,15,30,45,60),
                 linewidths=1)
@@ -201,13 +201,13 @@ plot_heatmap(ax=ax2,
 
 # Plot 3
 ticks = (0,15,30)
-max_value = 30 # values will clip at 30
 min_value = 0
+max_value = 30 # values will clip at 30
 
 plot_heatmap(ax=ax3, 
                 list_in=input_list, 
-                min_in=0, 
-                max_in=60, 
+                min_in=min_value, 
+                max_in=max_value, 
                 colormap=cm.binary_r,
                 ticks_scale_bar=(0,15,30,45,60),
                 linewidths=0)
