@@ -84,7 +84,7 @@ def map_nested_list(list_in, min_in, max_in, min_out, max_out):
 
 
 def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewidths=1,):
-    mapped_list = map_nested_list(input_list,min_value,max_value,0,1)
+    mapped_list = map_nested_list(list_in,min_value,max_value,0,1)
 
     c = ax.pcolor(mapped_list, 
                     edgecolors='w', 
