@@ -8,7 +8,7 @@ Inspired by <a href="https://www.principiae.be/">Jean-luc Doumont</a>.
 ## General
 - Notice how you don't need to rotate your head to read the y axis label
 - Easily add graph letters a), b), c), ... 
-<img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/deault_plot/output_plot.png" width="400">
+<img src="https://github.com/GillesOdb/clean-matplotlib-plots/blob/main/default_plot/output_plot.png" width="400">
 
 ## Error bar - different colors
 - Enter x data as a list
