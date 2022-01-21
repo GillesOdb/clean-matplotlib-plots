@@ -84,7 +84,7 @@ def map_nested_list(list_in, min_in, max_in, min_out, max_out):
 
 
 def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewidths=1,):
-    mapped_list = map_nested_list(list_in,min_value,max_value,0,1)
+    mapped_list = map_nested_list(list_in,min_in,max_in,0,1)
 
     c = ax.pcolor(mapped_list, 
                     edgecolors='w', 
@@ -92,13 +92,15 @@ def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewid
                     linewidths=linewidths)
 
     # Format colarbar on right
-    norm = colors.Normalize(vmin=min_value,vmax=max_value)
+    norm = colors.Normalize(vmin=min_in,vmax=max_in)
     sm = cm.ScalarMappable(cmap=colormap, norm=norm)
     sm.set_array([])
+    cb_increment = (max_in-min_in)/256
+    cb_max = max_in + cb_increment
     cb = plt.colorbar(sm, 
                         ax=ax, 
-                        ticks=((0,15,30,45,60)), 
-                        boundaries=np.arange(0,max_value+1,min_value+1))
+                        ticks=(ticks_scale_bar), 
+                        boundaries=np.arange(min_in,cb_max,cb_increment))
 
     # beautify colorbar
     # set colorbar label plus label color
@@ -171,7 +173,7 @@ input_list =   [[10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
 # Plot 1
 
-ticks = (0,15,30)
+ticks = (0,15,30,45,60)
 min_value = 0
 max_value = 60
 
@@ -180,36 +182,56 @@ plot_heatmap(ax=ax1,
                 min_in=min_value, 
                 max_in=max_value, 
                 colormap=cm.viridis,
-                ticks_scale_bar=(0,15,30,45,60),
+                ticks_scale_bar=ticks,
                 linewidths=0.5)
 
 
 
 # Plot 2
-ticks = (0,15,30)
+ticks = (0,20,40)
 min_value = 0
-max_value = 60
+max_value = 40 # clips at 40
 
 plot_heatmap(ax=ax2, 
                 list_in=input_list, 
                 min_in=min_value, 
                 max_in=max_value, 
                 colormap=cm.inferno,
-                ticks_scale_bar=(0,15,30,45,60),
+                ticks_scale_bar=ticks,
                 linewidths=1)
 
 
+
+
+input_list_2 =     [[1.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,1.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,0,2.0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,0,0,2.5,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,0,0,0,3.0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,3.5,0,0,0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,4.0,0,0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,4.5,0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0,5.0,0,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0,0,5.5,0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0,0,0,6.0,0,0,0,0,0],
+                    [0,0,0,0,0,0,0,0,0,0,0,5.5,0,0,0,0],
+                    [0,0,0,0,0,0,0,0,0,0,0,0,5.0,0,0,0],
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,4.5,0,0],
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,4.0,0],
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3.5],]
+
+
 # Plot 3
-ticks = (0,15,30)
+ticks = (0,1,2,3,4,5)
 min_value = 0
-max_value = 30 # values will clip at 30
+max_value = 5
 
 plot_heatmap(ax=ax3, 
-                list_in=input_list, 
+                list_in=input_list_2, 
                 min_in=min_value, 
                 max_in=max_value, 
                 colormap=cm.binary_r,
-                ticks_scale_bar=(0,15,30,45,60),
+                ticks_scale_bar=ticks,
                 linewidths=0)
 
 
