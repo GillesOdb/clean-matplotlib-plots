@@ -83,7 +83,12 @@ def map_nested_list(list_in, min_in, max_in, min_out, max_out):
 
 
 
-def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewidths=1,):
+def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewidths=1, autoscale_color=False):
+    if autoscale_color:
+        min_in = min([min (sublist) for sublist in list_in])
+        max_in = max([max (sublist) for sublist in list_in])
+
+
     mapped_list = map_nested_list(list_in,min_in,max_in,0,1)
 
     c = ax.pcolor(mapped_list, 
@@ -183,7 +188,8 @@ plot_heatmap(ax=ax1,
                 max_in=max_value, 
                 colormap=cm.viridis,
                 ticks_scale_bar=ticks,
-                linewidths=0.5)
+                linewidths=0.5,
+                autoscale_color=False)
 
 
 
@@ -198,7 +204,8 @@ plot_heatmap(ax=ax2,
                 max_in=max_value, 
                 colormap=cm.inferno,
                 ticks_scale_bar=ticks,
-                linewidths=1)
+                linewidths=1,
+                autoscale_color=False)
 
 
 
@@ -232,7 +239,8 @@ plot_heatmap(ax=ax3,
                 max_in=max_value, 
                 colormap=cm.binary_r,
                 ticks_scale_bar=ticks,
-                linewidths=0)
+                linewidths=0,
+                autoscale_color=False)
 
 
 
