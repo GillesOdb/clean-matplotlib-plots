@@ -94,6 +94,8 @@ def plot_heatmap(ax, list_in, min_in, max_in, ticks_scale_bar, colormap, linewid
     c = ax.pcolor(mapped_list, 
                     edgecolors='w', 
                     cmap=colormap,
+                    vmin=0,
+                    vmax=1,
                     linewidths=linewidths)
 
     # Format colarbar on right
